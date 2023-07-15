@@ -39,6 +39,7 @@ const stopGame = () => {
   if (intervalId) {
     clearInterval(intervalId)
     intervalId = false
+    input.blur()
     cleanupTimeoutId = setTimeout(() => {
       game.innerHTML = ``
       cleanupTimeoutId = false
@@ -60,26 +61,29 @@ const startGame = () => {
       activeLetters.shift()
     }, animationTime)
   }, 400)
+  input.focus()
 }
 start.addEventListener(`click`, () => {
   if (!intervalId) {
     startGame()
-    input.focus()
   }
 })
 
 stop.addEventListener(`click`, stopGame)
 
 document.addEventListener(`keydown`, (e) => {
-  if (intervalId && e.key === `Escape`) {
+  if (e.code === `Space`) {
+    e.preventDefault()
+    if (intervalId) stopGame()
+    else startGame()
+  } else if (intervalId && e.code === `Escape`) {
     stopGame()
-    input.blur()
   }
 })
 
 input.addEventListener(`keydown`, (e) => {
-    if (e.key === `Enter`) {
-    const attempt = input.value
+  if (e.key === `Enter`) {
+    const attempt = input.value.trim()
     if (dictionary.includes(attempt.toUpperCase())) {
       input.value = ``
       correctWords.insertAdjacentHTML(`afterbegin`, `<span>${attempt}</span>`)
@@ -91,7 +95,7 @@ input.addEventListener(`keydown`, (e) => {
       e.preventDefault()
       console.log(attempt)
     }
-  } else if (alphabet.includes(e.key) && !activeLetters.includes(e.key) || e.key === `Space`) {
+  } else if (e.code === `Space` || (alphabet.includes(e.key) && !activeLetters.includes(e.key))) {
     e.preventDefault()
   }
 })

@@ -1,3 +1,6 @@
+:root {
+  font-size: 16px;
+}
 
 * {
   font-family: Arial, serif;
@@ -33,11 +36,41 @@
   border-top: black solid 3px;
 }
 
+.buttons {
+  display: flex;
+  align-items: center;
+}
+
 #start, #stop {
-  font-size: inherit;
-  margin-top: 1rem;
-  width: 20rem;
-  padding: 0.5rem;
+  background: none;
+  color: transparent;
+}
+#start {
+  width: 0;
+  height: 0;
+  margin: 1rem;
+  overflow: hidden;
+  border-top: 1.5rem solid transparent;
+  border-bottom: 1.5rem solid transparent;
+  border-left: 3rem solid #666666;
+  border-right: 0;
+  padding: 0;
+}
+#stop {
+  width: 2rem;
+  height: 2.5rem;
+  border: none;
+  border-left: 0.5rem solid #666666;
+  border-right: 0.5rem solid #666666;
+}
+#start:hover, #stop:hover {
+  border-left-color: #111111;
+  border-right-color: #111111;
+  cursor: pointer;
+}
+
+.controls {
+  font-size: 1rem;
 }
 
 .points-container {
@@ -47,7 +80,7 @@
 .rules {
   display: flex;
   flex-direction: column;
-  max-height: 100vh;
+  max-height: calc(100vh - 1rem);
   margin-left: 2rem;
 }
 .faded-overflow-container {
