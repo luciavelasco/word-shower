@@ -1,11 +1,23 @@
 # Word Shower
 
+A zen little game where you stare at your screen and come up with words from a transient stream of letters.
+
 ## Rules
 
 - letters tumble down the screen
 - while a letter is on the screen you can type it to add it to your word
-- you can backspace to remove the most recent letter, but once you do you won't be able to get it back unless it comes back in the falling letters
-- click enter to submit your word, you'll get a point for each letter
+- you can backspace to remove a letter, but once you do you won't be able to get it back unless it comes back in the falling letters
+- click enter to submit your word, if it's a valid word it'll be added to your score, at a point per letter
+
+There's no timer and no pressure.
+
+## Ideas
+
+### Touchscreen/select support
+
+Rather than typing, select from the letters falling on screen.
+
+Add a backspace button so that the user doesn't need to use the keyboard/input, and remove the autofocus on the input. 
 
 ### Timed mode (tbc)
 
