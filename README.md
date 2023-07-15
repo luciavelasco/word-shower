@@ -64,6 +64,8 @@ Gain a wildcard every time you complete a word, which you can use to add a lette
 
 Just type the letter and, if you have a wildcard, it will add it to your word. Just delete your wildcard letter (highlighted) to get it back if you change your mind.
 
+Add a wildcard every 60 seconds, too (maybe reset the 60 seconds when you submit a word?).
+
 ### Speed changing
 
 Add a way for the user to set how fast the letters fall (perhaps also how many letters?).
