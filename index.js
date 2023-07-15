@@ -23,6 +23,7 @@ const randomLetterList = [...alphabet, ...weightedLetters, ...weightedLetters]
 const stopGame = () => {
   if (intervalId) {
     clearInterval(intervalId)
+    intervalId = false
     // todo: cleanup html?
     //  If I do, I'll have to clear this timeout on startGame().
     // setTimeout(() => {
@@ -34,8 +35,8 @@ const stopGame = () => {
   }
 }
 
-const startGame = () =>
-  setInterval(() => {
+const startGame = () => {
+  intervalId = setInterval(() => {
     const randomLetter = randomLetterList[Math.floor(Math.random() * randomLetterList.length)];
     const randomPosition = Math.floor(Math.random() * 270) / 10;
     game.insertAdjacentHTML(
@@ -47,10 +48,10 @@ const startGame = () =>
       activeLetters.shift()
     }, 4000)
   }, 400)
-
+}
 start.addEventListener(`click`, () => {
   if (!intervalId) {
-    intervalId = startGame()
+    startGame()
     input.focus()
   }
 })
