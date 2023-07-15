@@ -62,7 +62,13 @@ _this probably isn't a great way to do it because my library might not be comple
 
 Gain a wildcard every time you complete a word, which you can use to add a letter that isn't on the screen.
 
-Just type the letter and, if you have a wildcard, it will add it to your word. Just delete your wildcard letter (highlighted) to get it back if you change your mind. 
+Just type the letter and, if you have a wildcard, it will add it to your word. Just delete your wildcard letter (highlighted) to get it back if you change your mind.
+
+### Speed changing
+
+Add a way for the user to set how fast the letters fall (perhaps also how many letters?).
+
+Same functionality could be used to make the letters fall faster and faster the longer you play.
 
 ###### Game idea 2
 
