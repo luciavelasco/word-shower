@@ -2,6 +2,8 @@
 
 A zen little game where you stare at your screen and come up with words from a transient stream of letters.
 
+Play it [here](https://luciavelasco.github.io/word-shower/).
+
 ## Rules
 
 - letters tumble down the screen
