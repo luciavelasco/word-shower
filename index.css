@@ -1,0 +1,75 @@
+
+* {
+  font-family: Arial, serif;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 3rem;
+}
+
+#word-shower {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#game {
+  height: 30rem;
+  width: 30rem;
+  position: relative;
+  overflow: hidden;
+}
+
+#game-input {
+  font-size: inherit;
+  border: none;
+  background-color: transparent;
+  border-bottom: black solid 3px;
+  border-top: black solid 3px;
+}
+
+#start, #stop {
+  font-size: inherit;
+  margin-top: 1rem;
+  width: 20rem;
+  padding: 0.5rem;
+}
+
+.points-container {
+  margin-top: 1rem;
+}
+
+.rules {
+  display: flex;
+  flex-direction: column;
+}
+
+#correct-words {
+  font-size: 2rem;
+  min-width: 30rem;
+  border: solid black 3px;
+  margin-left: 2rem;
+  padding: 1rem;
+  flex-grow: 1;
+}
+
+.falling-letter {
+  position: absolute;
+  animation: fall 4s forwards linear;
+  font-size: inherit;
+  display: flex;
+  width: min-content;
+}
+
+@keyframes fall {
+  from {
+    top: 0;
+  }
+  to {
+    top: 100%;
+  }
+}
