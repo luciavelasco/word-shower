@@ -19,7 +19,31 @@ There's no timer and no pressure.
 
 Rather than typing, select from the letters falling on screen.
 
-Add a backspace button so that the user doesn't need to use the keyboard/input, and remove the autofocus on the input. 
+Add a backspace button so that the user doesn't need to use the keyboard/input, and remove the autofocus on the input.
+
+Redo UI layout at the same time so there's more screen for letters.
+
+### Badges
+
+Collect awards (should persist in localStorage).
+
+"Word beginning with QU", "mushroom". idk.
+
+#### Collections
+
+Add json files for, e.g.:
+
+- lists of animals. "Garden explorer (4 animals)" badge! "Park warden (8 animals)". "Forest dweller (12 animals)". "Safari guide (20 animals)".
+- archaic words. "Archaic word!", "Bookworm (3 archaic words)", "Etymologist (6 archaic words)", "Archaeolinguist(?) (10 archaic words)"
+- flowers? foraging? swamp?
+
+### Stats
+
+Most found word (show number of times each word is found next to the word as you type).
+
+Average word length.
+
+~~Total amount of time played?~~ Nothing involving time. This is a silly little zen game. 
 
 ### Timed mode (tbc)
 
@@ -28,14 +52,17 @@ Try to get as many words before your time runs out!
 ### Life mode (tbc)
 
 - you have three lives
-- if you ~type a letter that isn't on the screen or~ submit a word that isn't recognised you'll lose a life
+- if you ~~type a letter that isn't on the screen or~~ submit a word that isn't recognised you'll lose a life
 
 If you submit 4 invalid words, you lose!
 
 _this probably isn't a great way to do it because my library might not be complete_
 
+#### Wildcard mode
 
+Gain a wildcard every time you complete a word, which you can use to add a letter that isn't on the screen.
 
+Just type the letter and, if you have a wildcard, it will add it to your word. Just delete your wildcard letter (highlighted) to get it back if you change your mind. 
 
 ###### Game idea 2
 
