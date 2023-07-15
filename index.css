@@ -55,6 +55,10 @@
   margin-left: 2rem;
   padding: 1rem;
   flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  overflow: scroll;
 }
 
 .falling-letter {

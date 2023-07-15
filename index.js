@@ -8,6 +8,17 @@ const score = document.getElementById(`points`);
 const errorBox = document.getElementById(`error`);
 const activeLetters = [];
 let intervalId = false;
+let cleanupTimeoutId = false;
+
+let foundWords = JSON.parse(localStorage.getItem(`found-words`)) || {} // { [word]: foundCount } e.g. { hamster: 2 }
+const startingScore = Object.keys(foundWords)
+  .reduce((runningScore, word) => runningScore + (word.length * foundWords[word]), 0) || 0
+
+correctWords.innerHTML = Object.keys(foundWords)
+  .reverse()
+  .map(word => `<span>${word}</span>`)
+  .join(``)
+score.innerText = startingScore.toString()
 
 if (typeof dictionary === `undefined`) {
   console.error(`Could not initialise dictionary`)
@@ -16,26 +27,27 @@ if (typeof dictionary === `undefined`) {
   stop.disabled = true
 }
 
+// constants
 const alphabet = [`a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`, `i`, `j`, `k`, `l`, `m`, `n`, `o`, `p`, `q`, `r`, `s`, `t`, `u`, `v`, `w`, `x`, `y`, `z`]
 const weightedLetters = [`a`, `e`, `i`, `o`, `u`, `s`]
 const randomLetterList = [...alphabet, ...weightedLetters, ...weightedLetters]
+const animationTime = 4000;
 
+
+// Game Logic
 const stopGame = () => {
   if (intervalId) {
     clearInterval(intervalId)
     intervalId = false
-    // todo: cleanup html?
-    //  If I do, I'll have to clear this timeout on startGame().
-    // setTimeout(() => {
-    //   game.innerHTML = ``
-    //   console.log(activeLetters)
-    //   activeLetters.splice(0)
-    //   console.log(activeLetters)
-    // }, 3000)
+    cleanupTimeoutId = setTimeout(() => {
+      game.innerHTML = ``
+      cleanupTimeoutId = false
+    }, animationTime)
   }
 }
 
 const startGame = () => {
+  if (cleanupTimeoutId) clearTimeout(cleanupTimeoutId)
   intervalId = setInterval(() => {
     const randomLetter = randomLetterList[Math.floor(Math.random() * randomLetterList.length)];
     const randomPosition = Math.floor(Math.random() * 270) / 10;
@@ -46,7 +58,7 @@ const startGame = () => {
     activeLetters.push(randomLetter)
     setTimeout(() => {
       activeLetters.shift()
-    }, 4000)
+    }, animationTime)
   }, 400)
 }
 start.addEventListener(`click`, () => {
@@ -59,20 +71,20 @@ start.addEventListener(`click`, () => {
 stop.addEventListener(`click`, stopGame)
 
 document.addEventListener(`keydown`, (e) => {
-  if (intervalId && e.key === `Escape`) stopGame()
+  if (intervalId && e.key === `Escape`) {
+    stopGame()
+    input.blur()
+  }
 })
 
 input.addEventListener(`keydown`, (e) => {
-  if (intervalId && e.key === `Escape`) {
-    stopGame()
-  } else if (e.key === `Enter`) {
-    // if valid word
-    // const search = new RegExp(`^${input.value}$`, `i`)
+    if (e.key === `Enter`) {
     const attempt = input.value
     if (dictionary.includes(attempt.toUpperCase())) {
-      // TODO: add to matches array and increase score
       input.value = ``
-      correctWords.innerText = attempt + "\n" + correctWords.innerText
+      correctWords.insertAdjacentHTML(`afterbegin`, `<span>${attempt}</span>`)
+      foundWords = {...foundWords, [attempt]: foundWords[attempt] || 1 }
+      localStorage.setItem(`found-words`, JSON.stringify(foundWords))
       score.innerText = `${parseInt(score.innerText) + attempt.length}`
     } else {
       // else do nothing
