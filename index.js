@@ -1,7 +1,6 @@
 // Initialising game
 const game = document.getElementById(`game`);
-const start = document.getElementById(`start`);
-const stop = document.getElementById(`stop`);
+const toggleButton = document.getElementById(`toggle-play`);
 const input = document.getElementById(`game-input`);
 const correctWords = document.getElementById(`correct-words`);
 const score = document.getElementById(`points`);
@@ -45,6 +44,7 @@ const stopGame = () => {
       cleanupTimeoutId = false
     }, animationTime)
   }
+  toggleButton.innerText = `Start`
 }
 
 const startGame = () => {
@@ -61,21 +61,20 @@ const startGame = () => {
       activeLetters.shift()
     }, animationTime)
   }, 400)
+  toggleButton.innerText = `Pause`
   input.focus()
 }
-start.addEventListener(`click`, () => {
-  if (!intervalId) {
-    startGame()
-  }
-})
 
-stop.addEventListener(`click`, stopGame)
+const toggleGame = () => {
+  if (intervalId) stopGame()
+  else startGame()
+}
 
+toggleButton.addEventListener(`click`, toggleGame)
 document.addEventListener(`keydown`, (e) => {
   if (e.code === `Space`) {
     e.preventDefault()
-    if (intervalId) stopGame()
-    else startGame()
+    toggleGame()
   } else if (intervalId && e.code === `Escape`) {
     stopGame()
   }
@@ -83,7 +82,7 @@ document.addEventListener(`keydown`, (e) => {
 
 input.addEventListener(`keydown`, (e) => {
   if (e.key === `Enter`) {
-    const attempt = input.value.trim()
+    const attempt = input.value.trim().toLowerCase()
     if (dictionary.includes(attempt.toUpperCase())) {
       input.value = ``
       correctWords.insertAdjacentHTML(`afterbegin`, `<span>${attempt}</span>`)
