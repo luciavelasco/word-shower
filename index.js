@@ -8,6 +8,7 @@ const errorBox = document.getElementById(`error`);
 const activeLetters = [];
 let intervalId = false;
 let cleanupTimeoutId = false;
+let errorTimeoutId = false;
 
 let foundWords = JSON.parse(localStorage.getItem(`found-words`)) || {} // { [word]: foundCount } e.g. { hamster: 2 }
 const startingScore = Object.keys(foundWords)
@@ -83,7 +84,7 @@ document.addEventListener(`keydown`, (e) => {
 input.addEventListener(`keydown`, (e) => {
   if (e.key === `Enter`) {
     const attempt = input.value.trim().toLowerCase()
-    if (dictionary.includes(attempt.toUpperCase())) {
+    if (attempt.length > 3 && dictionary.includes(attempt.toUpperCase())) {
       input.value = ``
       correctWords.insertAdjacentHTML(`afterbegin`, `<span>${attempt}</span>`)
       foundWords = {...foundWords, [attempt]: foundWords[attempt] || 1 }
@@ -93,6 +94,18 @@ input.addEventListener(`keydown`, (e) => {
       // else do nothing
       e.preventDefault()
       console.log(attempt)
+      if (attempt) {
+        if (errorTimeoutId) clearTimeout(errorTimeoutId)
+        if (attempt.length > 3) {
+          errorBox.innerText = `${attempt} isn't in our dictionary`
+        } else {
+          errorBox.innerText = `must be at least 4 letters long`
+        }
+        errorTimeoutId = setTimeout(() => {
+          errorBox.innerText = ``
+          errorTimeoutId = false;
+        }, 1500)
+      }
     }
   } else if (e.code === `Space` || (alphabet.includes(e.key) && !activeLetters.includes(e.key))) {
     e.preventDefault()

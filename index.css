@@ -105,6 +105,12 @@
   width: min-content;
 }
 
+#error {
+  font-size: 1rem;
+  color: #666;
+  min-height: 1.5rem;
+}
+
 @keyframes fall {
   from {
     top: 0;
