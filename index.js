@@ -107,7 +107,7 @@ input.addEventListener(`keydown`, (e) => {
         }, 1500)
       }
     }
-  } else if (e.code === `Space` || (alphabet.includes(e.key) && !activeLetters.includes(e.key))) {
+  } else if (e.code === `Space` || (e.metaKey === false && alphabet.includes(e.key) && !activeLetters.includes(e.key))) {
     e.preventDefault()
   }
 })
